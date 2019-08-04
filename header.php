@@ -81,22 +81,21 @@
   </div>
 </div>
 <!-- /.site-top .style-01 -->
-    <?php
-    $query = "select * from `company`";
-    $gallery= $connect->query($query);
-    while($data = mysqli_fetch_array($gallery)){
 
-    ?>
 <header class="site-header style-01">
   <div class="container">
     <div class="row row-xs-center">
-
+      <?php
+      $query = "select * from `company`";
+      $gallery= $connect->query($query);
+      while($data = mysqli_fetch_array($gallery)){
+      ?>
       <div class="col-xs-10 col-lg-2 site-branding">
         <a href="index.php">
           <img src="data:image/jpeg;base64,<?php echo base64_encode($data['logo'])?>" alt="Renovation">
         </a>
       </div>
-
+<?php }?>
       <div class="col-xs-2 hidden-lg-up text-right">
         <a id="menu-button" href="#primary-menu-mobile"><i id="open-left" class="fa fa-bars"></i></a>
         <nav id="primary-menu-mobile">
@@ -104,9 +103,17 @@
             <li>
               <a href="index.php">Home</a>
             </li>
-
-            <li><a href="services.php">Our services</a>
-                </li>
+            <li><a href="services.php">Our Services</a>
+              <ul>
+                <?php
+                $query = "select * from `servicecateg`";
+                $gallery= $connect->query($query);
+                while($data = mysqli_fetch_array($gallery)){
+                ?>
+                <li><a href="services-detail.php?name=<?php echo $data['name']?>"><?php echo $data['name']?></a></li>
+                <?php }?>
+              </ul>
+            </li>
             <li class="menu-item"><a href="about.php">About us</a>
             </li>
             <li><a href="faq.php">FAQ</a></li>
@@ -118,7 +125,11 @@
         </nav>
       </div>
       <!-- / Menu Mobile -->
-
+      <?php
+      $query = "select * from `company`";
+      $gallery= $connect->query($query);
+      while($data = mysqli_fetch_array($gallery)){
+      ?>
       <div class="col-xs-12 col-sm-9 col-lg-8 extra-info">
         <div class="row">
           <div class="col-sm-5">
@@ -136,6 +147,7 @@
           </div>
         </div>
       </div>
+      <?php }?>
       <!-- /.extra-info -->
 
       <div class="col-xs-12 col-sm-3 col-lg-2 text-xs-center text-sm-right search-cart">
@@ -153,7 +165,11 @@
 
     </div>
   </div>
-
+  <?php
+  $query = "select * from `company`";
+  $gallery= $connect->query($query);
+  while($data = mysqli_fetch_array($gallery)){
+  ?>
   <div class="social-menu social-menu_right-arrow hidden-md-down">
     <ul class="menu">
       <li class="menu-item"><a href="<?php echo $data['facebook']?>">facebook</a></li>
@@ -161,11 +177,12 @@
       <li class="menu-item"><a href="<?php echo $data['instagram']?>">instagram</a></li>
     </ul>
   </div>
+  <?php } ?>
   <!-- /.social-menu -->
 
 </header>
 <!-- /.site-header .style-01 -->
-<?php } ?>
+
 <nav id="primary-menu" class="primary-menu_style-01 hidden-md-down">
   <div class="container">
     <div class="row">
@@ -174,7 +191,17 @@
           <li class="menu-item active">
             <a href="index.php">Home</a>
           </li>
-          <li class="menu-item"><a href="services.php">Our services</a>
+          <li class="menu-item"><a href="services.php">Our Services</a>
+            <ul class="sub-menu">
+              <?php
+              $query = "select * from `servicecateg`";
+              $gallery= $connect->query($query);
+              while($data = mysqli_fetch_array($gallery)){
+
+              ?>
+              <li class="menu-item"><a href="services-detail.php?name=<?php echo $data['name']?>"><?php echo $data['name']?></a></li>
+              <?php }?>
+            </ul>
           </li>
           <li class="menu-item"><a href="about.php">About us</a></li>
           <li class="menu-item"><a href="faq.php">FAQ</a></li>
